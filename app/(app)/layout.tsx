@@ -16,7 +16,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       <nav className="side"><div className="brand"><div className="logo">🛒</div><b>Borne-Admin</b><small>Gestion Centrale</small></div>
         <Link href="/dashboard">🏠 {t.dash}</Link><Link href="/catalogue">📦 {t.cat}</Link><Link href="/stock">🧊 {t.stock}</Link><Link href="/rapports">📊 {t.rep}</Link><Link href="/rapports#securite">🛡️ Anti-Fraude</Link>
         {s.role === "ADMIN" && <Link href="/journal">📋 {t.journal}</Link>}
-        <div className="ucard"><b>{s.user}</b><small>{role}</small><form action={logout}><button>⎋ {t.logout}</button></form></div></nav>
+        <div className="ucard"><b>{s.user}</b><small>{role}</small><form action={logout}><button>⎋ {t.logout}</button></form></div><small className="by">by Kenza</small></nav>
       <div className="body"><header className="top"><form action="/catalogue" className="search"><input name="q" placeholder="Rechercher un produit, une borne..." /></form>
         <span className="bell">🔔{n > 0 && <i>{n}</i>}</span>
         <div className="langs">{(["fr", "ar", "en"] as Lang[]).map((l) => <form key={l} action={setLang.bind(null, l)}><button className={l === lang ? "on" : ""}>{l.toUpperCase()}</button></form>)}</div>

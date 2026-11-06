@@ -12,9 +12,9 @@ export const USERS: Record<string, { password: string; role: Role }> = {
   superviseur: { password: "super123", role: "SUPERVISEUR" },
 };
 
-export async function createSession(s: Session) {
-  const body = Buffer.from(JSON.stringify({ ...s, exp: Date.now() + 8 * 3600_000 })).toString("base64url");
-  (await cookies()).set("session", `${body}.${sign(body)}`, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict", path: "/", maxAge: 8 * 3600 });
+export async function createSession(s: Session, remember = false) {
+  const body = Buffer.from(JSON.stringify({ ...s, exp: Date.now() + (remember ? 30 * 24 : 8) * 3600_000 })).toString("base64url");
+  (await cookies()).set("session", `${body}.${sign(body)}`, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict", path: "/", maxAge: (remember ? 30 * 24 : 8) * 3600 });
 }
 export async function getSession(): Promise<Session | null> {
   const raw = (await cookies()).get("session")?.value; if (!raw) return null;
