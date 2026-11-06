@@ -1,5 +1,5 @@
 // Graphiques SVG sans dépendance (rapides, imprimables, thème clair/sombre).
-const BLUE = "#1d4ed8", LIGHT = "#7cb8f2", BROWN = "#8a5a3b";
+const BLUE = "#b5651d", LIGHT = "#e8b273", BROWN = "#4a2a14";
 export function Donut({ parts }: { parts: { v: number; c: string }[] }) {
   const tot = parts.reduce((s, p) => s + p.v, 0) || 1; let a = -Math.PI / 2;
   return <svg viewBox="0 0 100 100" width="110" height="110">{parts.map((p, i) => { const b = a + (p.v / tot) * 2 * Math.PI - 0.0001, big = b - a > Math.PI ? 1 : 0, pt = (r: number, x: number) => `${50 + r * Math.cos(x)} ${50 + r * Math.sin(x)}`;
