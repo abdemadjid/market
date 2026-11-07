@@ -1,4 +1,4 @@
-# Borne Admin — Plateforme de gestion centrale (Next.js 16.4)
+# Kenzo Market — Plateforme de gestion centrale (Next.js 16.4)
 
 ```bash
 cp .env.example .env.local

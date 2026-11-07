@@ -13,7 +13,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const lang = await getLang(), t = dict(lang), n = db.alerts.filter((a) => a.open).length, role = s.role === "ADMIN" ? "Administrateur" : "Superviseur";
   return (
     <div className="shell" dir={lang === "ar" ? "rtl" : "ltr"} lang={lang}>
-      <nav className="side"><div className="brand"><div className="logo">🛒</div><b>Borne-Admin</b><small>Gestion Centrale</small></div>
+      <nav className="side"><div className="brand"><div className="logo">🛒</div><b>Kenzo Market</b><small>Gestion Centrale</small></div>
         <Link href="/dashboard">🏠 {t.dash}</Link><Link href="/catalogue">📦 {t.cat}</Link><Link href="/stock">🧊 {t.stock}</Link><Link href="/rapports">📊 {t.rep}</Link><Link href="/rapports#securite">🛡️ Anti-Fraude</Link>
         {s.role === "ADMIN" && <Link href="/journal">📋 {t.journal}</Link>}
         <div className="ucard"><b>{s.user}</b><small>{role}</small><form action={logout}><button>⎋ {t.logout}</button></form></div><small className="by">by Kenza</small></nav>

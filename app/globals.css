@@ -65,3 +65,40 @@ button{padding:10px 16px;border-radius:10px;border:0;background:var(--pri);color
 .lg-div{display:flex;align-items:center;gap:10px;color:#c9731a}.lg-div i{flex:1;height:1px;background:#e0b98a}
 .lg-acc{display:block;width:100%;text-align:start;background:none;color:inherit;padding:2px 0 2px 24px;font-weight:400;font-size:13px}.lg-acc:hover{text-decoration:underline}
 @media(max-width:900px){.lg{grid-template-columns:1fr}.lg-img{min-height:0;aspect-ratio:1050/941;background-size:cover}}
+.kz{min-height:100vh;display:grid;grid-template-columns:1.25fr 1fr;background:#24110a}
+.kz-left{position:relative;overflow:hidden;color:#fff;padding:34px 40px;display:flex;flex-direction:column;gap:18px;background:radial-gradient(circle at 25% 30%,#7a3f12,#3b1d0b 55%,#1e0e06)}
+.kz-left>*{position:relative;z-index:1}.kz-left header{display:flex;gap:14px;align-items:center}.kz-logo{font-size:54px;filter:drop-shadow(0 4px 10px #0006)}
+.kz-left h1{margin:0;font-size:44px;letter-spacing:-1px}.kz-left h1 b{background:linear-gradient(90deg,#f6c778,#f0a63a,#fff0cf);-webkit-background-clip:text;background-clip:text;color:transparent}.kz-left header p{margin:0;opacity:.85}
+.kz-rot{position:relative;height:30px;font-size:20px;font-style:italic;color:#f6c778}.kz-rot span{position:absolute;inset-inline-start:0;opacity:0}
+.kz-orb{position:absolute!important;border-radius:50%;filter:blur(60px);opacity:.45;z-index:0!important}.o1{width:320px;height:320px;background:#f0a63a;top:-80px;right:-60px}.o2{width:260px;height:260px;background:#b5651d;bottom:60px;left:-80px}.o3{width:200px;height:200px;background:#ffcf8a;top:45%;left:40%;opacity:.2}
+.kz-float{position:absolute;inset:0;z-index:0!important;pointer-events:none}.kz-float span{position:absolute;bottom:-50px;font-size:30px;opacity:0}
+.kz-stage{flex:1;display:flex;align-items:center;gap:20px;min-height:0}
+.kz-kiosk{width:min(300px,38%);aspect-ratio:600/650;object-fit:cover;border-radius:24px;-webkit-mask-image:radial-gradient(ellipse at 50% 50%,#000 52%,transparent 78%);mask-image:radial-gradient(ellipse at 50% 50%,#000 52%,transparent 78%)}
+.kz-feats{list-style:none;margin:0;padding:0;display:grid;gap:10px;flex:1;max-width:360px}
+.kz-feats li{display:flex;gap:12px;align-items:center;background:#ffffff14;border:1px solid #ffffff26;backdrop-filter:blur(8px);border-radius:16px;padding:12px 14px;opacity:0;animation:kzUp .7s ease forwards}
+.kz-feats li>span{font-size:26px;background:#f0a63a33;border-radius:12px;width:46px;height:46px;display:grid;place-items:center;flex:none}.kz-feats b{display:block;font-size:15px}.kz-feats small{opacity:.75;font-size:12px}
+.kz-left footer{display:grid;gap:10px;font-size:12px;opacity:.95}.kz-tags{display:flex;gap:8px;flex-wrap:wrap}.kz-tags span{background:#ffffff1a;border:1px solid #ffffff2b;border-radius:99px;padding:5px 12px}
+.kz-right{display:grid;place-items:center;padding:24px;position:relative;background:radial-gradient(circle at 80% 10%,#fff3df,#f3dcc0 45%,#e2b985)}
+.kz-by{position:absolute;bottom:12px;color:#5a3217;opacity:.8}
+.kz-wrap{position:relative;width:100%;max-width:440px;border-radius:28px;padding:2px;overflow:hidden;background:#e8b273;box-shadow:0 20px 60px #4a2a1440}
+.kz-wrap::before{content:"";position:absolute;inset:-60%;background:conic-gradient(transparent 0 65%,#f0a63a,#fff6e0,transparent)}
+.kz-card{position:relative;display:grid;gap:12px;text-align:center;background:#fffaf4;border-radius:26px;padding:28px 30px}
+.kz-avatar{width:88px;height:88px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-size:40px;background:#fff;border:3px solid #e8b273;position:relative}
+.kz-hi{color:#c9731a;font-weight:600}.kz-card h2{margin:0;font-size:25px}.kz-card h2 b{color:#c9731a}.kz-card p{margin:0}
+.kz-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#f3e3d0;border-radius:14px;padding:4px}.kz-tabs button{background:none;color:#6b4a2d;padding:9px 6px;font-size:13px}.kz-tabs .on{background:#4a2a14;color:#fff;box-shadow:0 4px 12px #4a2a1440}
+.kz-f{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #ecd6bd;border-radius:14px;padding:2px 12px;transition:.2s}.kz-f:focus-within{border-color:#f0a63a;box-shadow:0 0 0 4px #f0a63a2e}.kz-f input{border:0;background:none;outline:none;padding:13px 4px}
+.kz-eye{background:none;padding:4px;color:inherit}.kz-opts{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:13px}.kz-opts label{display:flex;gap:6px;align-items:center}.kz-opts input{width:auto}.kz-opts a{color:#c9731a;font-weight:600}
+.kz-info{background:#fde9cf;border-radius:10px;padding:8px;font-size:13px}
+.kz-btn{position:relative;overflow:hidden;display:flex;justify-content:center;gap:10px;align-items:center;background:linear-gradient(135deg,#4a2a14,#7a3f12);padding:15px;border-radius:14px;font-size:16px;transition:.2s}.kz-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px #4a2a1455}.kz-btn i{font-style:normal;transition:.2s}.kz-btn:hover i{transform:translateX(5px)}
+.kz-btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,#ffffff40,transparent);transform:skewX(-20deg)}
+.kz-or{display:flex;align-items:center;gap:10px;color:var(--mut);font-size:12px}.kz-or i{flex:1;height:1px;background:#e8d2b8}
+.kz-demo{display:grid;gap:4px;background:#f7e4cb;border-radius:14px;padding:12px;font-size:13px;text-align:start}
+@media(prefers-reduced-motion:no-preference){
+@keyframes kzUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes kzRot{0%{opacity:0;transform:translateY(8px)}6%,30%{opacity:1;transform:none}36%,100%{opacity:0;transform:translateY(-8px)}}
+@keyframes kzRise{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.5}100%{transform:translateY(-110vh) rotate(40deg);opacity:0}}
+@keyframes kzSpin{to{transform:rotate(360deg)}}@keyframes kzShine{to{left:140%}}@keyframes kzPulse{0%{box-shadow:0 0 0 0 #f0a63a66}100%{box-shadow:0 0 0 18px #f0a63a00}}@keyframes kzDrift{50%{transform:translate(30px,-30px)}}
+.kz-rot span{animation:kzRot 9s infinite}.kz-rot span:nth-child(2){animation-delay:3s}.kz-rot span:nth-child(3){animation-delay:6s}
+.kz-float span{animation:kzRise linear infinite}.kz-orb{animation:kzDrift 14s ease-in-out infinite}.kz-wrap::before{animation:kzSpin 6s linear infinite}.kz-avatar{animation:kzPulse 2.4s infinite}.kz-btn::after{animation:kzShine 3.2s infinite}}
+@media(prefers-reduced-motion:reduce){.kz-feats li,.kz-rot span:first-child{opacity:1}}
+@media(max-width:900px){.kz{grid-template-columns:1fr}.kz-left{padding:22px}.kz-stage{display:none}.kz-left h1{font-size:34px}}

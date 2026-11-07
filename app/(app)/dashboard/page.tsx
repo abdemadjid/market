@@ -12,7 +12,7 @@ export default function Dashboard() {
   const kpis: [string, string, string, string][] = [["🖥️", "Bornes actives", `${active} / ${db.kiosks.length}`, ""], ["🛍️", "Ventes aujourd'hui", `${new Intl.NumberFormat("fr-DZ").format(db.txs.filter((t) => t.at > Date.now() - 86400000).reduce((s, t) => s + t.totalDZD, 0))} DA`, ""],
     ["📦", "Produits en stock", String(db.products.reduce((s, p) => s + p.stock, 0)), ""], ["🔔", "Alertes", String(open.length), "bad"]];
   return <><Refresh />
-    <section className="hero"><div className="cart">🛒</div><div className="hero-t"><h2>Bienvenue sur<br /><b>Borne-Admin</b></h2><p>Gérez vos bornes, votre stock et vos ventes en toute simplicité.</p><Link href="/catalogue" className="btn">Accéder au catalogue →</Link></div>
+    <section className="hero"><div className="cart">🛒</div><div className="hero-t"><h2>Bienvenue sur<br /><b>Kenzo Market</b></h2><p>Gérez vos bornes, votre stock et vos ventes en toute simplicité.</p><Link href="/catalogue" className="btn">Accéder au catalogue →</Link></div>
       <div className="hero-art">🖥️<small>Une expérience d&apos;achat moderne</small></div></section>
     <div className="kpis">{kpis.map(([i, l, v, c]) => <div className="kpi" key={l}><span className="ico">{i}</span><div><small>{l}</small><b className={c}>{v}</b></div></div>)}</div>
     <div className="row-main">
