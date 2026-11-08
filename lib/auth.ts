@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { createHmac, timingSafeEqual } from "node:crypto";
 import type { Role } from "./data";
+import { can, type Perm } from "./perms";
 
 const secret = () => process.env.SESSION_SECRET ?? "dev-only-secret-dev-only-secret-0000";
 const sign = (v: string) => createHmac("sha256", secret()).update(v).digest("base64url");
@@ -32,3 +33,10 @@ export async function requireRole(...roles: Role[]) {
 export function kioskAuthorized(req: Request) {
   return req.headers.get("x-api-key") === (process.env.KIOSK_API_KEY ?? "dev-kiosk-key");
 }
+
+export async function requirePerm(p: Perm) { const s = await getSession(); if (!s || !can(s.role, p)) throw new Error("Accès refusé"); return s; }
+// Anti force brute : 5 échecs → blocage 5 min (en mémoire ; en production : Redis/Upstash).
+const fails = new Map<string, { n: number; until: number }>();
+export const isLocked = (u: string) => (fails.get(u)?.until ?? 0) > Date.now();
+export function noteFail(u: string) { const f = fails.get(u) ?? { n: 0, until: 0 }; if (++f.n >= 5) { f.until = Date.now() + 300000; f.n = 0; } fails.set(u, f); }
+export const clearFails = (u: string) => fails.delete(u);

@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import { Cairo } from "next/font/google";
 import "./globals.css";
-export const metadata: Metadata = { title: "Kenzo Market — Plateforme de gestion centrale", robots: { index: false } };
-export default function Root({ children }: { children: React.ReactNode }) {
-  return <html lang="fr"><body>{children}</body></html>;
+import { getLang } from "@/lib/i18n";
+const cairo = Cairo({ subsets: ["arabic", "latin"], display: "swap" });
+export const metadata: Metadata = { title: "Kenzo Market — Gestion Centrale", robots: { index: false } };
+export default async function Root({ children }: { children: React.ReactNode }) {
+  const lang = await getLang();
+  return <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}><body className={cairo.className}>{children}</body></html>;
 }

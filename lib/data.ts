@@ -4,26 +4,34 @@
 import { randomInt, randomUUID } from "node:crypto";
 
 export type Role = "ADMIN" | "SUPERVISEUR";
-export type Product = { barcode: string; name: { fr: string; ar: string; en: string }; priceDZD: number; weightG: number; stock: number; minStock: number };
+export type Category = { id: string; name: { fr: string; ar: string; en: string }; emoji: string; image?: string };
+export type Product = { barcode: string; categoryId: string; name: { fr: string; ar: string; en: string }; priceDZD: number; weightG: number; stock: number; minStock: number };
 export type Kiosk = { id: string; name: string; status: "EN_LIGNE" | "HORS_LIGNE" | "ALERTE"; lastSeen: number; offlineQueue: number };
 export type Alert = { id: string; at: number; kind: "RUPTURE" | "ECART_POIDS" | "CONTROLE" | "AIDE"; kioskId: string; message: string; open: boolean };
 export type Tx = { id: string; idempotencyKey: string; kioskId: string; at: number; durationSec: number; waitSec: number; totalDZD: number; items: { barcode: string; qty: number; measuredG: number }[]; exitCodeHash?: string; deviationPct?: number };
 export type Audit = { id: string; at: number; user: string; role: Role; action: string };
 
 const now = Date.now();
-const p = (barcode: string, fr: string, ar: string, en: string, priceDZD: number, weightG: number, stock: number, minStock = 10): Product =>
-  ({ barcode, name: { fr, ar, en }, priceDZD, weightG, stock, minStock });
+const p = (barcode: string, fr: string, ar: string, en: string, priceDZD: number, weightG: number, stock: number, minStock = 10, categoryId = "c-epicerie"): Product =>
+  ({ barcode, categoryId, name: { fr, ar, en }, priceDZD, weightG, stock, minStock });
 
 const g = globalThis as unknown as { __db?: DB };
-type DB = { products: Product[]; kiosks: Kiosk[]; alerts: Alert[]; txs: Tx[]; audit: Audit[]; exitCodes: Map<string, { txId: string; used: boolean; exp: number }>; helpRequests: number };
+type DB = { categories: Category[]; products: Product[]; kiosks: Kiosk[]; alerts: Alert[]; txs: Tx[]; audit: Audit[]; exitCodes: Map<string, { txId: string; used: boolean; exp: number }>; helpRequests: number };
 
 export const db: DB = (g.__db ??= {
+  categories: [
+    { id: "c-laitier", name: { fr: "Produits laitiers", ar: "منتجات الألبان", en: "Dairy" }, emoji: "🥛" },
+    { id: "c-boulangerie", name: { fr: "Boulangerie", ar: "مخبزة", en: "Bakery" }, emoji: "🍞" },
+    { id: "c-epicerie", name: { fr: "Épicerie", ar: "مواد غذائية", en: "Grocery" }, emoji: "🌾" },
+    { id: "c-boissons", name: { fr: "Boissons", ar: "مشروبات", en: "Drinks" }, emoji: "💧" },
+    { id: "c-fruits", name: { fr: "Fruits & légumes", ar: "فواكه وخضر", en: "Fruits & veg" }, emoji: "🍎" },
+  ],
   products: [
-    p("6130000000011", "Lait entier 1L", "حليب كامل الدسم 1 لتر", "Whole milk 1L", 140, 1030, 120),
-    p("6130000000028", "Pain de mie", "خبز القالب", "Sandwich bread", 120, 500, 8),
+    p("6130000000011", "Lait entier 1L", "حليب كامل الدسم 1 لتر", "Whole milk 1L", 140, 1030, 120, 10, "c-laitier"),
+    p("6130000000028", "Pain de mie", "خبز القالب", "Sandwich bread", 120, 500, 8, 10, "c-boulangerie"),
     p("6130000000035", "Huile de table 2L", "زيت المائدة 2 لتر", "Cooking oil 2L", 560, 1850, 45),
     p("6130000000042", "Semoule fine 1kg", "سميد ناعم 1 كغ", "Fine semolina 1kg", 95, 1005, 200),
-    p("6130000000059", "Eau minérale 1.5L", "ماء معدني 1.5 لتر", "Mineral water 1.5L", 45, 1530, 3, 20),
+    p("6130000000059", "Eau minérale 1.5L", "ماء معدني 1.5 لتر", "Mineral water 1.5L", 45, 1530, 3, 20, "c-boissons"),
   ],
   kiosks: ["Borne 01", "Borne 02", "Borne 03", "Borne 04"].map((name, i) => ({ id: `K${i + 1}`, name, status: i === 3 ? "HORS_LIGNE" : "EN_LIGNE", lastSeen: now - (i === 3 ? 600000 : 2000), offlineQueue: i === 3 ? 4 : 0 })),
   alerts: [
